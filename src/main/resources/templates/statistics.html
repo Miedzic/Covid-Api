@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>Country</td>
+        <td>Tested</td>
+        <td>Infected</td>
+        <td>Recovered</td>
+        <td>Deceased</td>
+        <td>Source Last Update</td>
+        <td>Apify Last Update</td>
+        <td>Sources</td>
+    </tr>
+</table>
+    <label th:text="${countries.get(0).countryName}"> </label>
+    <label th:text="${countries.get(1).infected}"> </label>
+</body>
+</html>

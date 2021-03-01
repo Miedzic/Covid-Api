@@ -2,11 +2,15 @@ package com.example.SpringFirstProject.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 @Controller
+@RequestMapping
 public class HomeController {
-    @GetMapping ("/")
+    @GetMapping ("/home")
     public String getHomepage(){
         return "index";
     }
+
 
 }

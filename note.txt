@@ -1,0 +1,65 @@
+---ADNOTACJE---
+@Component -
+@Service-
+@Repository-
+@Controller-
+@Configuration-
+@RestController-
+rejestrują beana z danej klasy o domyślnym id takim jak nazwa tej klasy
+
+Drugi sposób rejestrowania Beana w klasie oznaczonej jako @Configuration poprzez metodę
+oznaczoną @Bean
+Trzeci rzadko używany sposób poprzez plik xml konfiguracyjny
+
+@SpringBootApplication - adnotacja uruchamiająca automatyczną konfiguracje springa,
+między innymi @ComponentScan (przegląda wszystkie klasy w projekcie i rejestruje
+beany, klasy są tworzone po jednej sztuce jako singleton, zachowanie można zmienić
+adnotacją @Scope)
+
+Aby spring automatycznie do danego serwisu dodał inny(z puli beanów) trzeba stworzyć
+konstruktor przyjmujący ten obiekt (dependency injection)
+
+@Autowired - było wymagane wcześniej, obecnie wymagane jest tylko przy wstrzykiwaniu
+przez pole lub setter (w praktyce zastepuje konstruktor)
+---Kontrolery---
+@RequestMapping("/accounts") na klasie aby uzyskać przedrostek w każdej metodzie mapującej
+metody wykorzystywane
+@GetMapping
+@PostMapping
+@PutMapping
+@DeleteMapping
+@PatchMapping
+
+pozwalają ustawić url oraz rodzaj metody na który można wysłać zapytanie http do naszego serwera
+w ciele metody piszemy kod który ma się wywołać po takim zapytaniu, zwrócona wartość
+wskazuje widok który zwracamy,np nazwę pliku html lub obiekt w formacie JSON w przypadku
+REST API
+
+Rola kontrolera to jest łączenie aplikacji, obsługa zapytań ze świata zewnetrznego
+---Service----
+warstwa logiki naszej aplikacji, przygotowanie danych do wysłania na widok, walidacja
+---Repository---
+//czasem się nazywa DAO data access object
+klasy pozwalające na kontakt z bazą danych, budujemy je tworząc interfejsy implementujące
+JpaRepository<typ,id> lub CrudRepository<typ,id>, podstawowe metody są generowane
+za pomocą modułu JPA Springa wykorzystującego pod spodem (w tle) Hibernate(ORM)
+który z kolei wykorzystuje JDBC łączące jave z bazą SQL
+Repozytoria mogłyby być również no-sql (mongo DB)
+jest możliwośc budowania nowych metod poprzez stworzenie odpowiedniej nazwy
+wykorzystując słowa kluczowe z dokumentcji Springa oraz nazwy pól :?
+wiele metod jako typ zwracany zwraca optional od danego obiektu
+
+---Model---
+potrzebna adnotacja @Entity
+przechowujemy struktury bazodanowe (obiekty/encje)
+encja ma swoją reprezentacje w bazie danych
+pole ID traktowane jako klucz główny
+wymagany bezparametrowy konstruktor przez hibernate
+gettery settery
+---DTO---
+data transfer object
+objekt służący transportowaniu danych z jednej części aplikacji do drugich
+---Configuration---
+klasy odpowiedzialne za regulowanie działania aplikacji z poziomu kodu
+pozwala za pomocą metod dokładac dodaktowe beany
+Client - klasa odpowiedzialna za pobieranie danych zewnętrznych serwisów

@@ -20,6 +20,7 @@ public class RegisterController {
     public String getRegisterPage(){
         return "register";
     }
+
     @PostMapping("/register")
     public String postRegisterPage(String login, String passwd, Model model){
         UserRequest userRequest = new UserRequest(login,passwd);
