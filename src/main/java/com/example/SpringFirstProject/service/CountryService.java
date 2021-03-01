@@ -13,16 +13,22 @@ import java.util.List;
 
 @Service
 public class CountryService {
-    private CountryRepository countryRepository ;
+    private CountryRepository countryRepository;
 
     public CountryService(CountryRepository countryRepository) {
         this.countryRepository = countryRepository;
     }
-    public void fillDatabase(List<ApifyCountry> rawCountries){
-        List<Country> countries = new ArrayList<>();
-        if(countryRepository.count()>0){
+
+    public void fillDatabase(List<ApifyCountry> rawCountries) {
+        if (countryRepository.count() > 0) {
             return;
         }
+        List<Country> countries = mapToCountries(rawCountries);
+        countryRepository.saveAll(countries);
+    }
+
+    List<Country> mapToCountries(List<ApifyCountry> rawCountries) {
+        List<Country> countries = new ArrayList<>();
         for (ApifyCountry rawCountry : rawCountries) {
             Country country = Country.builder()
                     .country(rawCountry.getCountry())
@@ -34,18 +40,21 @@ public class CountryService {
                     .build();
 
             countries.add(country);
-            countryRepository.saveAll(countries);
         }
+        return countries;
     }
-    public int parseService(String value){
-        try{
+
+
+    public int parseService(String value) {
+        try {
             return Integer.parseInt(value);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return -1;
         }
 
     }
-    public List<Country> getAllCountries(){
-         return countryRepository.findAll();
+
+    public List<Country> getAllCountries() {
+        return countryRepository.findAll();
     }
 }

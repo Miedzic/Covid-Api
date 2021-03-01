@@ -1,8 +1,11 @@
 package com.example.SpringFirstProject.client;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+
 
 @Getter
 public class ApifyCountry {
@@ -17,7 +20,14 @@ public class ApifyCountry {
     private String tested;
     private String countryImgURL;
 
+
     public ApifyCountry() {
+    }
+
+    public ApifyCountry(String country, String infected, String deceased) {
+        this.country = country;
+        this.infected = infected;
+        this.deceased = deceased;
     }
 
     @Override
