@@ -14,8 +14,10 @@ public class StatisticsController {
         this.countryService = countryService;
     }
     @GetMapping("/statistics")
-    public String getStatistics(Model model){
-        model.addAttribute("countries",countryService.getAllCountries());
+    ///statistics?sorted=true&sortingBy=name&direction=ascending
+    public String getStatistics(boolean sorted, String sortingBy, String direction,Model model){
+        model.addAttribute("countries",countryService.getAllCountries(sorted,sortingBy,direction));
+
         return "statistics";
 
     }

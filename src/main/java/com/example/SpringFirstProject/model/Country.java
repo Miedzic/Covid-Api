@@ -1,5 +1,5 @@
 package com.example.SpringFirstProject.model;
-
+import com.example.SpringFirstProject.model.CountryDTO;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,11 +12,11 @@ import java.util.Objects;
 @Getter
 public class Country {
     @Id
-    private String country;
+    private String name;
     private int infected;
     private int recovered;
     private int deceased;
-    private LocalDateTime  sourceLastUpdate;
+    private String  sourceLastUpdate;
     private int tested;
     private String countryImgURL;
 
@@ -24,8 +24,8 @@ public class Country {
     }
 
     public Country(String countryName, int infected, int recovered, int deceased,
-                   LocalDateTime sourceLastUpdate, int tested, String countryImgURL) {
-        this.country = countryName;
+                   String sourceLastUpdate, int tested, String countryImgURL) {
+        this.name = countryName;
         this.infected = infected;
         this.recovered = recovered;
         this.deceased = deceased;
@@ -33,11 +33,32 @@ public class Country {
         this.tested = tested;
         this.countryImgURL = countryImgURL;
     }
-
+    public CountryDTO mapToDTO() {
+        return CountryDTO.builder()
+                .name(name)
+                .infected(checkIfThereIsData(infected))
+                .recovered(checkIfThereIsData(recovered))
+                .deceased(checkIfThereIsData(deceased))
+                .tested(checkIfThereIsData(tested))
+                .sourceLastUpdate(checkIfThereIsData(sourceLastUpdate))
+                .build();
+    }
+    public String checkIfThereIsData(int data){
+        if(data == -1){
+            return "NO DATA ";
+        }
+        else  return String.valueOf(data);
+    }
+    public String checkIfThereIsData(String data){
+        if(data == null){
+            return "NO DATA ";
+        }
+        else  return String.valueOf(data);
+    }
     @Override
     public String toString() {
         return "Record{" +
-                "countryTag='" + country + '\'' +
+                "countryTag='" + name + '\'' +
                 ", infected=" + infected +
                 ", recovered=" + recovered +
                 ", deceased=" + deceased +
@@ -52,11 +73,11 @@ public class Country {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Country country = (Country) o;
-        return this.country.equals(country.country);
+        return this.name.equals(country.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(country);
+        return Objects.hash(name);
     }
 }

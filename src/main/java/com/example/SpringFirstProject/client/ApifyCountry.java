@@ -1,8 +1,6 @@
 package com.example.SpringFirstProject.client;
 
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +12,7 @@ public class ApifyCountry {
     private String infected;
     private String recovered;
     private String deceased;
-    private LocalDateTime sourceLastUpdate;
+    private String lastUpdatedSource;
     private String moreData;
     private String sourceURL;
     private String tested;
@@ -37,7 +35,7 @@ public class ApifyCountry {
                 ", infected='" + infected + '\'' +
                 ", recovered='" + recovered + '\'' +
                 ", deceased='" + deceased + '\'' +
-                ", sourceLastUpdate=" + sourceLastUpdate +
+                ", sourceLastUpdate=" + lastUpdatedSource +
                 ", moreData='" + moreData + '\'' +
                 ", sourceURL='" + sourceURL + '\'' +
                 ", tested='" + tested + '\'' +

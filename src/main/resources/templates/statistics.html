@@ -7,17 +7,29 @@
 <body>
 <table>
     <tr>
-        <td>Country</td>
+        <td>Name
+            <a href="/statistics?sorted=true&sortingBy=name&direction=ascending"> < </a>
+            <a href="/statistics?sorted=true&sortingBy=name&direction=descending"> > </a>
+        </td>
         <td>Tested</td>
         <td>Infected</td>
         <td>Recovered</td>
         <td>Deceased</td>
         <td>Source Last Update</td>
-        <td>Apify Last Update</td>
-        <td>Sources</td>
+       <!-- <td>Apify Last Update</td>
+        <td>Sources</td> -->
+    </tr>
+    <tr th:each="country:${countries}">
+        <td th:text="${country.name}"> </td>
+        <td th:text="${country.tested}"></td>
+        <td th:text="${country.infected}"></td>
+        <td th:text="${country.recovered}"></td>
+        <td th:text="${country.deceased}"></td>
+        <td th:text="${country.sourceLastUpdate}"></td>
+
     </tr>
 </table>
-    <label th:text="${countries.get(0).countryName}"> </label>
+    <label th:text="${countries.get(0).name}"> </label>
     <label th:text="${countries.get(1).infected}"> </label>
 </body>
 </html>
