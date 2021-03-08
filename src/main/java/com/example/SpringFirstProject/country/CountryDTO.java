@@ -1,4 +1,4 @@
-package com.example.SpringFirstProject.model;
+package com.example.SpringFirstProject.country;
 
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 @Builder
 @Data
-public class CountryDTO {
+ class CountryDTO {
     private String name;
     private String infected;
     private String recovered;

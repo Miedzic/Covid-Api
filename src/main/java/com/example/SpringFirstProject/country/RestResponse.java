@@ -1,11 +1,11 @@
-package com.example.SpringFirstProject.client;
+package com.example.SpringFirstProject.country;
 
-import com.example.SpringFirstProject.model.Country;
+import com.example.SpringFirstProject.country.Country;
 import lombok.Getter;
 
 import java.util.List;
 @Getter
-public class RestResponse {
+ class RestResponse {
     private List<Country> countries;
 
     @Override

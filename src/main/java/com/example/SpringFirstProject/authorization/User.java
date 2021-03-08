@@ -1,4 +1,4 @@
-package com.example.SpringFirstProject.model;
+package com.example.SpringFirstProject.authorization;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class User implements UserDetails {
+ class User implements UserDetails {
     private String login;
     private String passwd;
     private String role = "ROLE_USER";

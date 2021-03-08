@@ -1,12 +1,10 @@
-package com.example.SpringFirstProject.client;
+package com.example.SpringFirstProject.country;
 
 import lombok.Getter;
 
-import java.time.LocalDateTime;
-
 
 @Getter
-public class ApifyCountry {
+ class ApifyCountry {
 
     private String country;
     private String infected;

@@ -1,6 +1,6 @@
-package com.example.SpringFirstProject.configuration;
+package com.example.SpringFirstProject.authorization;
 
-import com.example.SpringFirstProject.service.UserServiceDetailsImpl;
+import com.example.SpringFirstProject.authorization.UserServiceDetailsImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private UserServiceDetailsImpl userServiceDetails;
 

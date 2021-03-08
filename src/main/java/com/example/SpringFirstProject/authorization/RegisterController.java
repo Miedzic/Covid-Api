@@ -1,15 +1,15 @@
-package com.example.SpringFirstProject.controller;
+package com.example.SpringFirstProject.authorization;
 
-import com.example.SpringFirstProject.request.UserRequest;
-import com.example.SpringFirstProject.service.RegisterService;
-import com.example.SpringFirstProject.service.RegisterServiceException;
+import com.example.SpringFirstProject.authorization.UserRequest;
+import com.example.SpringFirstProject.authorization.RegisterService;
+import com.example.SpringFirstProject.authorization.RegisterServiceException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class RegisterController {
+ class RegisterController {
     private RegisterService registerService;
 
     public RegisterController(RegisterService registerService) {

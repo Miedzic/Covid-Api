@@ -1,11 +1,11 @@
-package com.example.SpringFirstProject.request;
+package com.example.SpringFirstProject.authorization;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserRequest {
+ class UserRequest {
     private String login;
     private String passwd;
 

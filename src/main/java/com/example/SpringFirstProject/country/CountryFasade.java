@@ -1,9 +1,8 @@
-package com.example.SpringFirstProject.service;
+package com.example.SpringFirstProject.country;
 
-import com.example.SpringFirstProject.client.ApifyCountry;
-import com.example.SpringFirstProject.model.Country;
-import com.example.SpringFirstProject.model.CountryDTO;
-import com.example.SpringFirstProject.repository.CountryRepository;
+import com.example.SpringFirstProject.country.Country;
+import com.example.SpringFirstProject.country.CountryDTO;
+import com.example.SpringFirstProject.country.CountryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,14 +11,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CountryService {
+ public class CountryFasade {
     private CountryRepository countryRepository;
 
-    public CountryService(CountryRepository countryRepository) {
+     CountryFasade(CountryRepository countryRepository) {
         this.countryRepository = countryRepository;
     }
 
-    public void fillDatabase(List<ApifyCountry> rawCountries) {
+     void fillDatabase(List<ApifyCountry> rawCountries) {
         if (countryRepository.count() > 0) {
             return;
         }
@@ -44,7 +43,7 @@ public class CountryService {
         return countries;
     }
 
-    public int parseService(String value) {
+     int parseService(String value) {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
@@ -53,14 +52,14 @@ public class CountryService {
 
     }
 
-    public List<CountryDTO> getAllCountries(boolean sorted, String sortingBy, String direction) {
+    List<CountryDTO> getAllCountries(boolean sorted, String sortingBy, String direction) {
         return countryRepository.findAll().stream()
                 .sorted(generateComparator(sorted, sortingBy, direction))
                 .map(country -> country.mapToDTO())
                 .collect(Collectors.toList());
 
     }
-    public Comparator<Country> generateComparator(boolean sorted, String sortingBy, String direction){
+     Comparator<Country> generateComparator(boolean sorted, String sortingBy, String direction){
         if(!sorted){
            return Comparator.comparing(Country::getName);
         }

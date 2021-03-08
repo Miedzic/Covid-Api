@@ -1,6 +1,5 @@
-package com.example.SpringFirstProject.client;
+package com.example.SpringFirstProject.country;
 
-import com.example.SpringFirstProject.service.CountryService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,15 +9,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class Client {
+ class Client {
     private static final String URL = "https://api.apify.com/v2/key-value-stores/tVaYRsPHLjNdNBu7S/records/LATEST?disableRedirect=true";
     private RestTemplate restTemplate;
-    private CountryService countryService;
+    private CountryFasade countryFasade;
 
-    public Client(RestTemplate restTemplate, CountryService countryService) {
+    public Client(RestTemplate restTemplate, CountryFasade countryFasade) {
         this.restTemplate = restTemplate;
 
-        this.countryService = countryService;
+        this.countryFasade = countryFasade;
     }
 
     @PostConstruct
@@ -28,7 +27,7 @@ public class Client {
         List<ApifyCountry> countries = Arrays.stream(restResponse)
                 .collect(Collectors.toList());
         System.out.println(countries);
-        countryService.fillDatabase(countries);
+        countryFasade.fillDatabase(countries);
 
     }
 }

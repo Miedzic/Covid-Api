@@ -1,16 +1,14 @@
-package com.example.SpringFirstProject.model;
-import com.example.SpringFirstProject.model.CountryDTO;
+package com.example.SpringFirstProject.country;
 import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
 import java.util.Objects;
 @Builder
 @Entity
 @Getter
-public class Country {
+ class Country {
     @Id
     private String name;
     private int infected;
@@ -49,7 +47,7 @@ public class Country {
         }
         else  return String.valueOf(data);
     }
-    public String checkIfThereIsData(String data){
+    public String checkIfThereIsData(String  data){
         if(data == null){
             return "NO DATA ";
         }

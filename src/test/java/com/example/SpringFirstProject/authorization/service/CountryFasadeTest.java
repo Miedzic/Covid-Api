@@ -1,8 +1,9 @@
-package com.example.SpringFirstProject.service;
+package com.example.SpringFirstProject.authorization.service;
 
-import com.example.SpringFirstProject.client.ApifyCountry;
-import com.example.SpringFirstProject.model.Country;
-import com.example.SpringFirstProject.repository.CountryRepository;
+import com.example.SpringFirstProject.country.CountryService;
+import com.example.SpringFirstProject.country.client.ApifyCountry;
+import com.example.SpringFirstProject.country.Country;
+import com.example.SpringFirstProject.country.CountryRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CountryServiceTest {
+class CountryFasadeTest {
 
     @Test
     void shouldMapApifyCountriesToCountries(){
