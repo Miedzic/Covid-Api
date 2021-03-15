@@ -1,8 +1,5 @@
 package com.example.SpringFirstProject.authorization;
 
-import com.example.SpringFirstProject.authorization.UserRequest;
-import com.example.SpringFirstProject.authorization.RegisterService;
-import com.example.SpringFirstProject.authorization.RegisterServiceException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,10 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
  class RegisterController {
-    private RegisterService registerService;
+    private AuthorizationFasade authorizationFasade;
 
-    public RegisterController(RegisterService registerService) {
-        this.registerService = registerService;
+    public RegisterController(AuthorizationFasade authorizationFasade) {
+        this.authorizationFasade = authorizationFasade;
     }
 
     @GetMapping("/register")
@@ -25,7 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
     public String postRegisterPage(String login, String passwd, Model model){
         UserRequest userRequest = new UserRequest(login,passwd);
         try {
-            registerService.register(userRequest);
+            authorizationFasade.register(userRequest);
         }catch (RegisterServiceException e){
             model.addAttribute("error",e.getMessage());
             return "error";

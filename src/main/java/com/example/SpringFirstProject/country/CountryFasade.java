@@ -49,7 +49,6 @@ import java.util.stream.Collectors;
         } catch (NumberFormatException e) {
             return -1;
         }
-
     }
 
     List<CountryDTO> getAllCountries(boolean sorted, String sortingBy, String direction) {
