@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,11 +51,23 @@ import java.util.stream.Collectors;
             return -1;
         }
     }
+    public CountryDTO getCountryByName(String name){
+         Country country = countryRepository.findCountryByName(name)
+                 .orElseThrow( ()->  new CountryException("nie znaleziono country")) ;
 
-    List<CountryDTO> getAllCountries(boolean sorted, String sortingBy, String direction) {
+          return   country.mapToDTO();
+        }
+
+    public List<CountryDTO> getAllCountries(boolean sorted, String sortingBy, String direction) {
         return countryRepository.findAll().stream()
                 .sorted(generateComparator(sorted, sortingBy, direction))
                 .map(country -> country.mapToDTO())
+                .collect(Collectors.toList());
+
+    }
+    public List<CountryStatisticsDTO> getAllCountries() {
+        return countryRepository.findAll().stream()
+                .map(country -> country.mapToStatisticDTO())
                 .collect(Collectors.toList());
 
     }

@@ -24,7 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
         http.headers().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/","/console","/register","/statistics")
+                .antMatchers("/","/console","/register","/statistics","/api/countries","api/global")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

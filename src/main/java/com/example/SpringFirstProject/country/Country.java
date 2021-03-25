@@ -41,6 +41,15 @@ import java.util.Objects;
                 .sourceLastUpdate(checkIfThereIsData(sourceLastUpdate))
                 .build();
     }
+    public CountryStatisticsDTO mapToStatisticDTO(){
+        return CountryStatisticsDTO.builder()
+                .name(name)
+                .infected(infected)
+                .recovered(recovered)
+                .deceased(deceased)
+                .tested(tested)
+                .build();
+    }
     public String checkIfThereIsData(int data){
         if(data == -1){
             return "NO DATA ";
