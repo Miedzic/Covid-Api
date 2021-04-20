@@ -4,6 +4,7 @@ import lombok.Getter;
 
 
 @Getter
+//p2 to jest model danych który łapie treści otrzymane z apify
  class ApifyCountry {
 
     private String country;

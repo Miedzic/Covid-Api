@@ -33,7 +33,6 @@ class StatisticsRestController {
     }
     @GetMapping("/api/global")
     public ResponseEntity<GlobalDTO> getGlobal(){
-        System.out.println();
         GlobalDTO globalDTO = statisticsFasade.getGlobal();
         return ResponseEntity.ok(globalDTO);
    };

@@ -10,13 +10,14 @@ import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
+// jednak tutaj 7 /// klasa entity to taka której obiekty przechowujemy w bazie danych
 @Entity
+//implementujemy interfejs na potrzeby spring security
  class User implements UserDetails {
     private String login;
     private String passwd;
     private String role = "ROLE_USER";
-
+//każde entity musi mieć jako jedno z pól Id, klucz główny sqlowy
     @Id
     @GeneratedValue
     private int id;
@@ -25,7 +26,7 @@ import java.util.List;
         this.login = login;
         this.passwd = passwd;
     }
-
+  // tutaj jest wymagany przez hibernate bezparametrowy konstruktor
     public User() {
     }
     @Override
@@ -36,7 +37,7 @@ import java.util.List;
                 ", id=" + id +
                 '}';
     }
-
+    // wszyscy mają tą samą role
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();

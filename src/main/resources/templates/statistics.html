@@ -3,33 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
-<table>
+<!-- większość to zwykły bootstrap, w głównie tam gdzie th używa się hiberante, ogólnie
+chyba nie trzeba opisywać-->
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4v" style="text-align:center">Covid Statistics</h1>
+    </div>
+    <table class="table table-dark table-striped">
+        <div class="container-fluid">
+            <thead>
     <tr>
-        <td>Name
+        <td scope="col">Number of infected</td>
+        <td scope="col">Number of tested</td>
+        <td scope="col">Number of recovered</td>
+        <td scope="col">Number of deceased</td>
+        <td scope="col">Active infected(estimated)</td>
+    </tr>
+            </thead>
+        </div>
+        <tbody >
+        <!-- tutaj te totale są -->
+    <tr>
+        <td scope="row" th:text="${global.totalInfected}"></td>
+        <td scope="row" th:text="${global.totalTested}"></td>
+        <td scope="row" th:text="${global.totalRecovered}">Wszystkie wyleczenia:</td>
+        <td scope="row" th:text="${global.totalDeceased}">Wszystkie śmierci:</td>
+        <td scope="row" th:text="${global.activeInfected}">Aktywne zarażenia:</td>
+    </tr>
+        </tbody>
+    <tr>
+        <td scope="col">Name
             <a href="/statistics?sorted=true&sortingBy=name&direction=ascending"> < </a>
             <a href="/statistics?sorted=true&sortingBy=name&direction=descending"> > </a>
         </td>
-        <td>Tested</td>
-        <td>Infected</td>
-        <td>Recovered</td>
-        <td>Deceased</td>
-        <td>Source Last Update</td>
+        <td scope="col">Tested</td>
+        <td scope="col">Infected</td>
+        <td scope="col">Recovered</td>
+        <td scope="col">Deceased</td>
+        <td scope="col">Source Last Update</td>
        <!-- <td>Apify Last Update</td>
         <td>Sources</td> -->
     </tr>
+ <!-- To jest ważniejsze tutaj za pomocą hibernate się wypisuje wszystkie dane
+  z listy przy pomocy pętli each / czyli za każdym razem bierze
+  jedno country z countries -->
     <tr th:each="country:${countries}">
-        <td th:text="${country.name}"> </td>
-        <td th:text="${country.tested}"></td>
-        <td th:text="${country.infected}"></td>
-        <td th:text="${country.recovered}"></td>
-        <td th:text="${country.deceased}"></td>
-        <td th:text="${country.sourceLastUpdate}"></td>
+        <td scope="row" th:text="${country.name}"> </td>
+        <td scope="row"  th:text="${country.tested}"></td>
+        <td scope="row"  th:text="${country.infected}"></td>
+        <td scope="row"  th:text="${country.recovered}"></td>
+        <td scope="row"  th:text="${country.deceased}"></td>
+        <td scope="row" th:text="${country.sourceLastUpdate}"></td>
 
     </tr>
+        <!-- tu takie uproszczone wyciąganie danych na sztywno -->
 </table>
     <label th:text="${countries.get(0).name}"> </label>
     <label th:text="${countries.get(1).infected}"> </label>
+</div>
 </body>
 </html>
