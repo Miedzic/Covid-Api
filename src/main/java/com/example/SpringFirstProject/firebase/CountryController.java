@@ -1,8 +1,8 @@
 package com.example.SpringFirstProject.firebase;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
@@ -17,9 +17,9 @@ public class CountryController {
     }
 
     @GetMapping("/getCountryDetails")
-    public Country getCountry(@RequestParam String name ) throws InterruptedException, ExecutionException, TimeoutException {
+    public List<Country> getCountry(@RequestParam String name ) throws InterruptedException, ExecutionException, TimeoutException {
         System.out.println("Start");
-       Country country = countryService.getCountryDetails(name);
+       List<Country> country = countryService.getCountryDetails(name);
         System.out.println(country);
         return country;
     }

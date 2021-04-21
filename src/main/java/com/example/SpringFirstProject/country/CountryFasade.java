@@ -19,28 +19,15 @@ import java.util.stream.Collectors;
      CountryFasade(CountryRepository countryRepository) {
         this.countryRepository = countryRepository;
     }
- // do poprawy ( to dla mniexD)
-
-    // p4 nie zapisujemy pobranych państw jeśli są już w bazie danych, tutaj to jest sprawdzane
      void fillDatabase(List<ApifyCountry> rawCountries) {
         if (countryRepository.count() > 0) {
             return;
         }
-        /* ta metoda odpowiada na przekonwertowanie "apify country" na "country" dzięki czemu
-        dzięki czemu możemy użyć je do analizy statystyk (poprzez konwersje na inty)
-         i dostosowujemy do przechowywania w bazie danych (id)
-         */
         List<Country> countries = mapToCountries(rawCountries);
-        // tutaj zapisujemy do bazy za pomocą saveAll
         countryRepository.saveAll(countries);
     }
 
     List<Country> mapToCountries(List<ApifyCountry> rawCountries) {
-
-         //
-        //RestTemplate template = new RestTemplate();
-       // template.postForObject("",country, Country.class);
-
         List<Country> countries = new ArrayList<>();
         for (ApifyCountry rawCountry : rawCountries) {
             Country country = Country.builder()
@@ -66,13 +53,10 @@ import java.util.stream.Collectors;
     }
     public CountryDTO getCountryByName(String name){
          Country country = countryRepository.findCountryByName(name)
-                 .orElseThrow( ()->  new CountryException("nie znaleziono country")) ;
+                 .orElseThrow( ()->  new CountryException("country not found")) ;
 
           return   country.mapToDTO();
         }
-//t2
-    // pobiera z państwa z bazy danych, sortuje i przemapowuje na obiekt transportu danych (DTO) i zwraca w postaci listy
-
     public List<CountryDTO> getAllCountries(boolean sorted, String sortingBy, String direction) {
         return countryRepository.findAll().stream()
                 .sorted(generateComparator(sorted, sortingBy, direction))
@@ -80,8 +64,6 @@ import java.util.stream.Collectors;
                 .collect(Collectors.toList());
 
     }
-
-    // czyli w dużym skrócie implementacja sposobu sortowania
      Comparator<Country> generateComparator(boolean sorted, String sortingBy, String direction){
         if(!sorted){
            return Comparator.comparing(Country::getName);
@@ -92,7 +74,6 @@ import java.util.stream.Collectors;
             return Comparator.comparing(Country::getName);
         }
     }
-    // tutaj natomiast pobiera państwa bez sortowania, czyli wersja podstawowa
     public List<CountryStatisticsDTO> getAllCountries() {
         return countryRepository.findAll().stream()
                 .map(country -> country.mapToStatisticDTO())

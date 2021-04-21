@@ -4,8 +4,6 @@ import com.example.SpringFirstProject.country.CountryStatisticsDTO;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.util.Objects;
 
 @Builder
@@ -13,18 +11,18 @@ import java.util.Objects;
  class Country {
 
     private String name;
-    private int infected;
-    private int recovered;
-    private int deceased;
+    private long infected;
+    private long recovered;
+    private long deceased;
     private String  sourceLastUpdate;
-    private int tested;
+    private long tested;
     private String countryImgURL;
 
     public Country() {
     }
 
-    public Country(String countryName, int infected, int recovered, int deceased,
-                   String sourceLastUpdate, int tested, String countryImgURL) {
+    public Country(String countryName, long infected, long recovered, long deceased,
+                   String sourceLastUpdate, long tested, String countryImgURL) {
         this.name = countryName;
         this.infected = infected;
         this.recovered = recovered;
@@ -43,7 +41,7 @@ import java.util.Objects;
                 .sourceLastUpdate(checkIfThereIsData(sourceLastUpdate))
                 .build();
     }
-    public CountryStatisticsDTO mapToStatisticDTO(){
+   /* public CountryStatisticsDTO mapToStatisticDTO(){
         return CountryStatisticsDTO.builder()
                 .name(name)
                 .infected(infected)
@@ -51,8 +49,8 @@ import java.util.Objects;
                 .deceased(deceased)
                 .tested(tested)
                 .build();
-    }
-    public String checkIfThereIsData(int data){
+    }*/
+    public String checkIfThereIsData(long data){
         if(data == -1){
             return "NO DATA ";
         }

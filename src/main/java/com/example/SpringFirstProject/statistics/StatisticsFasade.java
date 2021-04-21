@@ -14,14 +14,14 @@ public class StatisticsFasade {
     public StatisticsFasade(CountryFasade countryFasade) {
         this.countryFasade = countryFasade;
     }
-//pobieramy państwa i ich dane
+
     public List<CountryStatisticsDTO> getCountries(){
         return countryFasade.getAllCountries();
     }
     public CountryDTO getCountry(String country){
     return countryFasade.getCountryByName(country);  //TODO wyjatki!
     }
-//tutaj dodajemy statystyki wszystkich państw w globalne
+
     public GlobalDTO getGlobal(){
         GlobalDTO globalDTO = new GlobalDTO();
         List<CountryStatisticsDTO> listOfCountries = getCountries();
@@ -31,7 +31,6 @@ public class StatisticsFasade {
             globalDTO.totalDeceased+=country.deceased;
             globalDTO.totalTested+=country.tested;
         });
-        //odejmujemy martwych i wyleczonych od zarażonych by uzyskać aktywnych zarażonych
         globalDTO.activeInfected=globalDTO.totalInfected-globalDTO.totalDeceased-globalDTO.totalRecovered;
         return globalDTO;
     }

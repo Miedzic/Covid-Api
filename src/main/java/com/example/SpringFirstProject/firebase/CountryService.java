@@ -2,17 +2,15 @@ package com.example.SpringFirstProject.firebase;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.stream.Collectors;
 
 //CRUD operations
 @Service
@@ -29,21 +27,21 @@ public class CountryService {
         System.out.println(documentReference.getPath());
     }
 
-    public Country getCountryDetails(String name) throws InterruptedException, ExecutionException, TimeoutException {
+    public List<Country> getCountryDetails(String name) throws InterruptedException, ExecutionException, TimeoutException {
 
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        DocumentReference documentReference = dbFirestore.collection(COL_NAME).document(name);
-        ApiFuture<DocumentSnapshot> future = documentReference.get();
+        return dbFirestore.collection(COL_NAME).whereEqualTo("name",name).get().get().getDocuments().stream()
+                .map(queryDocumentSnapshot -> new Country(queryDocumentSnapshot.getData().get("name").toString(),
+                        (long)queryDocumentSnapshot.getData().get("infected"),
+                        (long)queryDocumentSnapshot.getData().get("recovered"),
+                        (long)queryDocumentSnapshot.getData().get("deceased"),
+                        queryDocumentSnapshot.getData().get("sourceLastUpdate").toString(),
+                        (long)queryDocumentSnapshot.getData().get("tested"),
+                        (String) queryDocumentSnapshot.getData().get("countryImgURL")
 
-        DocumentSnapshot document = future.get();
-        Country country = null;
+                        )
+                ).collect(Collectors.toList());
 
-        if(document.exists()) {
-            country = document.toObject(Country.class);
-            return country;
-        }else {
-            return null;
-        }
     }
 
     public String updateCountryDetails(Country country) throws InterruptedException, ExecutionException {

@@ -17,8 +17,6 @@ class StatisticsRestController {
     public StatisticsRestController(StatisticsFasade statisticsFasade) {
         this.statisticsFasade = statisticsFasade;
     }
-
-    //controller restowy zwraca dane w formie json -> biblioteka Jackson, oznaczamy adnotacją @restcontroller
     @GetMapping("/api/countries")
     public ResponseEntity<?> getCountries(String name){
         if(name != null){
